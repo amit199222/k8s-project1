@@ -38,8 +38,15 @@ spec:
               name: mariadb-secret
               key: password
         volumeMounts:
-        - mountPath: /var/lib/mysql
-          name: mariadb-storage
+        - name: mariadb-storage
+          mountPath: /var/lib/mysql
+        - name: mariadb-init
+          mountPath: /docker-entrypoint-initdb.d
+          readOnly: true
+      volumes:
+      - name: mariadb-init
+        configMap:
+          name: mariadb-init
   volumeClaimTemplates:
   - metadata:
       name: mariadb-storage
@@ -48,3 +55,4 @@ spec:
       resources:
         requests:
           storage: 5Gi
+

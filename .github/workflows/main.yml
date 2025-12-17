@@ -1,0 +1,11 @@
+name: Java CI with Maven
+on:
+ push:
+  branches: [main]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    environment: Prod
+    steps:
+      - name: Print variable
+        run: echo "Deploying to $DEPLOY_NAME"
